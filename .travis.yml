@@ -9,7 +9,12 @@ addons:
       - ubuntu-toolchain-r-test
     packages:
       - libglew-dev # required by headless-gl.
+      - libglu1-mesa-dev
       - libgles2-mesa-dev
+      - libxrandr-dev
+      - libxcursor-dev
+      - libxinerama-dev
+      - libxi-dev
       - libopenal-dev
       - libalut-dev
       - libxxf86vm-dev
@@ -31,10 +36,7 @@ before_script:
 script:
   - go build -v ./...
   - gopherjs build -v github.com/hajimehoshi/ebiten/examples/blocks
-
-# Give up testing on Travis CI because of X error
-# https://travis-ci.org/hajimehoshi/ebiten/jobs/107404013
-# - go test -v ./...
+  - go test -v ./...
 
 # Looks like testing GL on node is hard.
 # - gopherjs test -v github.com/hajimehoshi/ebiten github.com/hajimehoshi/ebiten/internal/graphics
